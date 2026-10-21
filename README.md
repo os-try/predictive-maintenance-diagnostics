@@ -94,6 +94,7 @@ predictive-maintenance-diagnostics/
 ├── .github/
 │   └── workflows/
 │       └── tests.yml                           # CI: pytest bei jedem Push
+├── .gitattributes                              # einheitliche Zeilenenden (LF/CRLF)
 ├── data/
 │   ├── raw/                                    # Originaldaten (AI4I 2020)
 │   └── processed/                              # Train-/Val-/Test-Splits
