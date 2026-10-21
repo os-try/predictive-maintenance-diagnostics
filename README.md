@@ -217,7 +217,7 @@ Continuous Integration heißt: Bei jeder Änderung läuft automatisch ein Prüfl
 
 Eine [Streamlit](https://streamlit.io)-Anwendung (`app.py`) macht die Diagnose interaktiv nutzbar -- zeigt für jeden der vier Fehlermodi eine eigene Statuszeile mit individuellem Schwellenwert und einer auf den jeweiligen Mechanismus zugeschnittenen Handlungsempfehlung (z. B. bei HDF: "Kühlung und Drehzahl prüfen").
 
-**Online:** [Streamlit-URL einfügen -- Platzhalter bis zum Deployment](https://PLATZHALTER.streamlit.app)
+**Online:** [https://predictive-maintenance-diagnosticsgit-fw5uqf6v5dk5utjvmfbyrm.streamlit.app/](https://predictive-maintenance-diagnosticsgit-fw5uqf6v5dk5utjvmfbyrm.streamlit.app/)
 
 Weitere Details:
 - Modellauswahl per Radiobutton (Random Forest empfohlen, MLP, oder beide nebeneinander).
