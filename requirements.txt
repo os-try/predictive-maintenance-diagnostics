@@ -1,6 +1,8 @@
 # Pinnen von scikit-learn: Die dokumentierten Ergebnisse (insbesondere die Zufallssuche
 # in Notebook 04) wurden mit dieser Version erzeugt; neuere Versionen können andere
 # Hyperparameter-Kombinationen ziehen. Gespeicherte .pkl-Modelle sind versionsabhängig.
+# CPU-Variante von PyTorch (klein; für Streamlit Cloud und CI ausreichend)
+--extra-index-url https://download.pytorch.org/whl/cpu
 torch
 scikit-learn==1.8.0
 iterative-stratification

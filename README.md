@@ -21,7 +21,7 @@ Statt nur *ob* ein Ausfall bevorsteht, sagen die Modelle in diesem Projekt vorhe
 
 - UCI-Repository (Übersichtsseite): https://archive.ics.uci.edu/dataset/601/ai4i+2020+predictive+maintenance+dataset
 
-Nach dem Download unter `data/raw/ai4i2020.csv` ablegen (die Datei selbst sollte per `.gitignore` vom Repo ausgeschlossen werden -- nur die Ordnerstruktur wird versioniert).
+Die Rohdatei liegt bereits unter `data/raw/ai4i2020.csv` im Repository (CC BY 4.0 erlaubt die Weitergabe bei Namensnennung). Die Train-/Val-/Test-Splits unter `data/processed/` erzeugt Notebook 01; sie sind ebenfalls versioniert, damit alle Notebooks und Ergebnisse auf denselben Daten beruhen.
 
 Rohmerkmale: `Type` (Produktqualität L/M/H), `Air temperature [K]`, `Process temperature [K]`, `Rotational speed [rpm]`, `Torque [Nm]`, `Tool wear [min]`.
 
