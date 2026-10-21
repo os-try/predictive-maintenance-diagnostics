@@ -1,0 +1,296 @@
+/* Entfernt den Browser-Fokus-Rahmen, der bei Überschriften (h1-h3)
+   erscheinen kann, z.B. wenn ein interner Anchor-Link angeklickt wird
+   oder das Element per Tab-Taste fokussiert wird. Rein kosmetisch, hat
+   keine funktionale Bedeutung. */
+h1, h2, h3 {
+    outline: none !important;
+    border: none !important;
+}
+
+/* Streamlit reserviert standardmäßig sehr viel Leerraum oben (oft
+   mehrere rem, ursprünglich für die Toolbar/den Header gedacht) —
+   das war ein Hauptgrund, warum die Seite insgesamt zu hoch für den
+   Viewport war und Nutzer scrollen/herauszoomen mussten.
+   ACHTUNG:
+   eine zu starke Reduzierung (zuvor 1rem) führte dazu, dass die feste
+   Streamlit-Symbolleiste ("Deploy" oben rechts) den Titel überlappt
+   hat — 3rem ist ein Kompromiss, der genug Abstand zur Symbolleiste
+   lässt, ohne wieder unnötig viel Platz zu verschwenden. */
+.block-container {
+    padding-top: 3rem !important;
+    padding-bottom: 1rem !important;
+}
+
+/* Streamlit fügt standardmäßig zwischen JEDEM Element (Überschriften,
+   Eingabefelder, Zeilen) einen recht großzügigen vertikalen Abstand
+   (gap) ein — bei vielen Elementen auf dieser Seite summiert sich das
+   spürbar zur Gesamthöhe. Deutlich verkleinert, ohne die einzelnen
+   Elemente selbst zu verändern. */
+[data-testid="stVerticalBlock"] {
+    gap: 0.4rem !important;
+}
+
+/* Überschriften ("Modell", "Messwerte") bringen zusätzlich eigene
+   Margins mit, die zum obigen gap noch hinzukommen — ebenfalls
+   verkleinert. */
+h2, h3 {
+    margin-top: 0.2rem !important;
+    margin-bottom: 0.2rem !important;
+}
+
+/* Titel: weiß, zentriert, eine Zeile, schrumpft statt umzubrechen oder
+   über den Rand der Eingabemaske hinauszuragen (clamp() skaliert die
+   Schriftgröße abhängig von der Fensterbreite). */
+h1 {
+    color: #FFFFFF !important;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: clamp(1.1rem, 4vw, 2.2rem) !important;
+    margin-top: 0 !important;
+    margin-bottom: 0.2rem !important;
+}
+
+/* Untertitel (der Beschreibungstext direkt unter dem Titel): eigene
+   Farbe, eine Zeile statt mehrerer. margin-bottom klein, um
+   zusätzlichen vertikalen Platz zu sparen. */
+.app-subtitle {
+    color: #C7D3DC;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 0;
+    margin-bottom: 0.4rem;
+}
+.app-intro {
+    text-align: center;
+    font-size: 0.875rem;
+    opacity: 0.65;
+    margin-top: 0;
+    margin-bottom: 1.6rem;
+}
+
+/* Eingabefelder selbst etwas kompakter (weniger Innenabstand oben/
+   unten). Streamlit nutzt für Selectboxen intern React Aria (Klasse
+   ".react-aria-ComboBox" mit einem input[role="combobox"] darin),
+   nicht BaseWeb -- per Browser-Entwicklertools bestätigte Struktur.
+   Beide Feldtypen auf eine gemeinsame, feste Höhe gezwungen (height +
+   box-sizing: border-box, damit Innenabstand/Rand in diese Höhe
+   eingerechnet werden statt zusätzlich addiert zu werden) -- das
+   garantiert exakte Übereinstimmung unabhängig von der internen
+   Struktur. */
+.stNumberInput input,
+.stSelectbox .react-aria-ComboBox {
+    height: 2.5rem !important;
+    box-sizing: border-box !important;
+}
+.stSelectbox .react-aria-ComboBox input[role="combobox"] {
+    height: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* Labels der Eingabefelder (Type, Air temperature, ...). stWidgetLabel
+   trifft NUR die Beschriftung von Formularelementen, nicht z.B.
+   st.subheader ("Messwerte") -- dessen Stil bleibt dadurch
+   unverändert. */
+[data-testid="stWidgetLabel"] p {
+    color: #E8833A !important;
+}
+
+/* Eingabefelder (Zahlenfelder und Dropdown): Hintergrund + Text.
+   Farbe direkt auf das gesamte ComboBox-Control gesetzt: Textfeld
+   (input[role="combobox"]) UND den "Open"-Button mit dem Pfeil-Icon,
+   damit das komplette Feld inklusive Pfeilbereich einheitlich
+   erscheint. */
+.stNumberInput input,
+.stSelectbox .react-aria-ComboBox,
+.stSelectbox .react-aria-ComboBox * {
+    background-color: #6f84ec !important;
+    color: #FFFFFF !important;
+}
+
+/* Abgerundete Ecken + dezenter Rand für das Auswahlfeld, damit es
+   optisch zu den Zahlenfeldern passt. Bewusst NUR auf
+   ".react-aria-ComboBox" selbst (nicht auch auf "*" wie bei der
+   Farbregel oben) -- sonst bekäme zusätzlich noch das innere Textfeld
+   und der Pfeil-Button jeweils einen eigenen, separaten Rand statt
+   eines einzigen, durchgehenden Rands um das gesamte Feld.
+   Beim Zahlenfeld nur an den ÄUSSEREN Ecken gerundet (links am
+   Zahlenfeld, rechts am letzten Stepper-Button), damit das
+   Gesamt-Widget wie eine durchgehende Kapsel wirkt statt wie zwei
+   aneinandergrenzende Teile. */
+.stSelectbox .react-aria-ComboBox {
+    border: none !important;
+    box-shadow: 0 0 0 1px #C7D3DC !important;
+    border-radius: 0.5rem !important;
+    overflow: hidden !important;
+}
+/* Zahlenfelder: derselbe haardünne Rand um das GANZE Widget (Eingabe
+   + Stepper-Buttons), nicht um das innere input. */
+.stNumberInput [data-testid="stNumberInputContainer"] {
+    border: none !important;
+    box-shadow: 0 0 0 1px #C7D3DC !important;
+    border-radius: 0.5rem !important;
+    overflow: hidden !important;
+}
+.stNumberInput input {
+    border-top-left-radius: 0.5rem !important;
+    border-bottom-left-radius: 0.5rem !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+/* Stepper-Buttons (+/-) neben den Zahlenfeldern: dunkler Hintergrund,
+   bewusst abgesetzt vom helleren Eingabefeld-Blau oben. Mehrere
+   gängige data-testid-Varianten gleichzeitig angesprochen, damit die
+   Regel möglichst versionsunabhängig greift. */
+.stNumberInput button,
+[data-testid="stNumberInputStepUp"],
+[data-testid="stNumberInputStepDown"] {
+    background-color: #050a23 !important;
+    border-radius: 0 !important;
+}
+/* Nur der LETZTE (rechteste) Stepper-Button -- üblicherweise "+" --
+   bekommt rechts eine Rundung, da er die äußerste rechte Ecke des
+   gesamten Feld-Widgets bildet. */
+.stNumberInput button:last-of-type,
+[data-testid="stNumberInputStepUp"] {
+    border-top-right-radius: 0.5rem !important;
+    border-bottom-right-radius: 0.5rem !important;
+}
+
+/* Pfeil-Button ("v") des Auswahlfelds: dieselbe dunkle Farbe wie die
+   Stepper-Buttons oben, auf eine feste Breite gebracht, damit beide
+   Feldtypen optisch symmetrisch wirken (heller Hauptbereich + dunkler
+   Bedienbereich rechts, in vergleichbarer Breite). Per Browser-
+   Entwicklertools bestätigter Selektor: der Button trägt
+   aria-label="Open" und aria-haspopup="listbox". Zwischen
+   ".react-aria-ComboBox" und dem Button liegt noch eine Zwischenebene
+   mit role="group", die eigenes Padding mitbringt -- auf 0 gesetzt,
+   Kinder per align-items:stretch auf volle Höhe gebracht. */
+.stSelectbox .react-aria-ComboBox [role="group"] {
+    padding: 0 !important;
+    align-items: stretch !important;
+    height: 100% !important;
+}
+.stSelectbox .react-aria-ComboBox button[aria-label="Open"] {
+    background-color: #050a23 !important;
+    width: 4rem !important;
+    min-width: 4rem !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+}
+/* Das Pfeil-Icon (SVG) selbst würde sonst noch die helle
+   Hintergrundfarbe aus der allgemeinen Wildcard-Regel oben erben (die
+   Wildcard trifft ausnahmslos jedes Nachfahren-Element) -- hier
+   gezielt auf transparent zurückgesetzt, damit nur die dunkle
+   Button-Fläche sichtbar bleibt. */
+.stSelectbox .react-aria-ComboBox button[aria-label="Open"] svg,
+.stSelectbox .react-aria-ComboBox button[aria-label="Open"] * {
+    background-color: transparent !important;
+}
+
+/* Button-Text ("Diagnose berechnen"), Breite füllt die gesamte
+   Eingabemaske aus (use_container_width=True). Streamlit wickelt den
+   Button-Text intern oft in ein eigenes <p>, das eine einfache
+   ".stButton button"-Angabe überschreiben kann -- deshalb zusätzlich
+   explizit auf das verschachtelte <p> gezielt. */
+.stButton button,
+.stButton button p {
+    color: #C7D3DC !important;
+    font-size: 1.375rem !important;
+}
+.stButton button {
+    width: 100%;
+    background-color: #050a23 !important;
+    border: 1px solid #C7D3DC !important;
+}
+.stButton button:hover {
+    background-color: #10163a !important;
+    border-color: #C7D3DC !important;
+}
+
+/* Kippschalter (falls in einer künftigen Version verwendet): dunkler
+   Hintergrund für die Schalterfläche, passend zu Button und
+   Stepper-Buttons. Struktur laut Adobes offizieller React-Aria-
+   Dokumentation: ".react-aria-Switch" (äußeres Label) mit einem
+   direkten Kind-<div class="indicator"> als Schalterfläche. */
+[data-testid="stToggle"] .react-aria-Switch > div,
+[data-testid="stToggle"] .react-aria-Switch .indicator,
+[data-testid="stToggle"] .react-aria-Switch[data-selected] > div,
+[data-testid="stToggle"] .react-aria-Switch > div[data-selected] {
+    background-color: #050a23 !important;
+}
+
+/* Status-Leisten (st.success/error/warning): Schriftgröße passend zur
+   Button-Schriftgröße, damit Aktion (Button) und Ergebnis (Status-
+   Leiste) optisch gleich gewichtet wirken. line-height kompakter als
+   der Standard, da hier teils mehrzeiliger Text (Wahrscheinlichkeit +
+   Empfehlung) steht. */
+[data-testid="stAlertContentSuccess"] p,
+[data-testid="stAlertContentError"] p,
+[data-testid="stAlertContentWarning"] p {
+    font-size: 1.1rem !important;
+    line-height: 1.3 !important;
+    text-align: center;
+}
+
+/* Kein eingebautes Icon (Häkchen/Warndreieck) mehr -- nur noch kräftig
+   eingefärbter Text. *= statt = beim data-testid-Selektor trifft
+   jeden Testid, der "Alert" ENTHÄLT, robuster als der exakte Name. */
+[data-testid*="Alert"] svg {
+    display: none !important;
+}
+[data-testid="stAlertContainer"],
+[data-testid="stAlert"] {
+    justify-content: center !important;
+}
+
+[data-testid="stAlertContentSuccess"] p { color: #00FF00 !important; }
+[data-testid="stAlertContentError"] p { color: #FF1A1A !important; }
+/* Orange, passend zur bereits bestehenden Akzentfarbe der
+   Eingabefeld-Labels (#E8833A) -- visuell klar zwischen Grün (niedrig)
+   und Rot (hoch) einsortiert, statt Streamlits Standard-Gelb. */
+[data-testid="stAlertContentWarning"] p {
+    color: #E8833A !important;
+}
+
+/* Richtet die Inhalte NEBENEINANDER liegender st.columns() an ihrer
+   Unterkante aus statt (Streamlit-Standard) oben -- betrifft z.B. die
+   "Messwerte"-Spalten (col1/col2). */
+[data-testid="stHorizontalBlock"] {
+    align-items: flex-end;
+}
+
+/* Abstand zu den Eingabefeldern darüber verdoppelt gegenüber dem
+   Standard-Abstand (stVerticalBlock gap: 0.4rem). */
+.stButton {
+    margin-top: 0.4rem;
+}
+
+/* Modellvergleich: Boxen je Fehlermodus stehen in einer Zeile, oben
+   bündig und gleich hoch -- eine lange Alarmmeldung verschiebt nichts. */
+.st-key-cmp_results [data-testid="stHorizontalBlock"] {
+    align-items: stretch !important;
+}
+.st-key-cmp_results [data-testid="stColumn"] > [data-testid="stVerticalBlock"],
+.st-key-cmp_results [data-testid="stColumn"] [data-testid="stElementContainer"],
+.st-key-cmp_results [data-testid="stAlert"],
+.st-key-cmp_results [data-testid="stAlertContainer"] {
+    height: 100%;
+}
+.st-key-cmp_results [data-testid="stAlertContainer"] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}

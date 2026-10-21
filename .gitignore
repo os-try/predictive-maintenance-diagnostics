@@ -1,0 +1,21 @@
+# Virtuelle Umgebungen
+.venv/
+venv/
+env/
+.pdm-pytorch/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Daten: Rohdaten und Splits nicht versionieren (Ordner bleiben über .gitkeep erhalten)
+code/data/raw/*
+code/data/processed/*
+!code/data/raw/.gitkeep
+!code/data/processed/.gitkeep
+
+# System
+.DS_Store
+Thumbs.db

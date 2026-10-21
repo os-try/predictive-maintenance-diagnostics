@@ -1,0 +1,15 @@
+# Pinnen von scikit-learn: Die dokumentierten Ergebnisse (insbesondere die Zufallssuche
+# in Notebook 04) wurden mit dieser Version erzeugt; neuere Versionen können andere
+# Hyperparameter-Kombinationen ziehen. Gespeicherte .pkl-Modelle sind versionsabhängig.
+torch
+scikit-learn==1.8.0
+iterative-stratification
+pandas
+numpy
+matplotlib
+seaborn
+joblib
+jupyter
+ipykernel
+pytest
+streamlit
