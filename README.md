@@ -152,6 +152,7 @@ predictive-maintenance-diagnostics/
 │   └── test_train.py                           # Gewichte, Metriken
 ├── app.py                                      # Streamlit-App
 ├── style.css                                   # CSS-Theming der App (von app.py geladen)
+├── LICENSE                                     # MIT-Lizenz
 ├── pytest.ini                                  # Suchpfad für src/
 ├── requirements.txt                            # scikit-learn gepinnt
 └── README.md                                   # diese Datei
@@ -251,4 +252,4 @@ Beim hier verwendeten, eher kleinen MLP (10.000 Zeilen Tabellendaten) macht eine
 
 ## Lizenz
 
-MIT License.
+Der Code steht unter der MIT-Lizenz, Volltext in [`LICENSE`](LICENSE). Der Datensatz AI4I 2020 stammt aus dem UCI Machine Learning Repository und unterliegt seiner eigenen Lizenz (CC BY 4.0, Quellenangabe siehe oben).
